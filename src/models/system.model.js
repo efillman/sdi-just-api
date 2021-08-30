@@ -27,6 +27,21 @@ class System extends Model {
     };
   }
 
+  static get relationMappings() {
+    const Services = require('./services.model');
+
+    return {
+      service: {
+        relation: Model.HasOneRelation,
+        modelClass: Services,
+        join: {
+          from: 'system.service_id',
+          to: 'services.service_id',
+        },
+      },
+    };
+  }
+
   $beforeInsert() {
     this.created_at = this.updated_at = new Date().toISOString();
   }

@@ -28,7 +28,7 @@ class Services extends Model {
     const System = require('./system.model');
 
     return {
-      system: {
+      systems: {
         relation: Model.HasManyRelation,
         modelClass: System,
         join: {

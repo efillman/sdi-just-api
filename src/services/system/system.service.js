@@ -7,7 +7,9 @@ module.exports = function (app) {
   const options = {
     id: 'system_id',
     Model: createModel(app),
-    paginate: app.get('paginate')
+    paginate: app.get('paginate'),
+    whitelist: ["$eager"],
+    allowedEager: "[service]",
   };
 
   // Initialize our service with any options it requires

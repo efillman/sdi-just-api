@@ -2,11 +2,13 @@
 
 module.exports = {
   before: {
-    all: [],
-    find: [
+    all: [
 
     ],
-    get: [],
+    find: [
+    ],
+    get: [
+    ],
     create: [],
     update: [],
     patch: [],
