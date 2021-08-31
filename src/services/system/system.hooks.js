@@ -3,8 +3,30 @@
 module.exports = {
   before: {
     all: [],
-    find: [],
-    get: [],
+    find: [
+      async (context) => {
+        const query = {
+          $select: ['*'],
+          $eager: 'service',
+          $sort: { created_at: -1 },
+        };
+
+        context.params.query = { ...context.params.query, ...query };
+        return context;
+      }
+    ],
+    get: [
+      async (context) => {
+        const query = {
+          $select: ['*'],
+          $eager: 'service',
+          $sort: { created_at: -1 },
+        };
+
+        context.params.query = { ...context.params.query, ...query };
+        return context;
+      }
+    ],
     create: [],
     update: [],
     patch: [],

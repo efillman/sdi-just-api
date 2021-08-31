@@ -9,7 +9,7 @@ module.exports = function (app) {
     Model: createModel(app),
     paginate: app.get('paginate'),
     whitelist: ['$eager'],
-    allowedEager: '[system]',
+    allowedEager: '[systems]',
   };
 
   // Initialize our service with any options it requires
