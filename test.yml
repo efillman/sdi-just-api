@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  just-api-test-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: PG_USER
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: PG_DATABASE
+
+  just-api-test-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://PG_USER:password@just-api-test-db:5432/PG_DATABASE
+      PORT: 8080
+      IS_LOCAL: 'true'

@@ -24,10 +24,14 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
+    "testdocker:pre": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && npx jest --watchAll=false --forceExit",
+    "testdocker:unit": "npm install && npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && npx jest --watchAll=false --forceExit",
+    "testdocker": "docker-compose -f test.yml -p just-api-test up --build --force-recreate --no-deps --exit-code-from just-api-test-api",
+    "devdocker": "docker-compose -f dev.yml -p just-api-dev up --build --force-recreate --no-deps",
     "test": "npm run jest",
     "lint": "eslint src/. test/. --config .eslintrc.json --fix",
     "build": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && node src/",
-    "start": "nodemon src/",
+    "start": "PORT=8080 nodemon src/",
     "jest": "jest  --forceExit"
   },
   "jest": {
