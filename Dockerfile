@@ -1,13 +1,21 @@
-FROM node:lts-alpine
+FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/base-image/harden-nodejs14:14.16.1
 
-RUN mkdir -p /src/app
+# temporary fix until P1 adds chown capabilities or makes /home/node owned by appuser
+USER root
+RUN node -e "const fs = require('fs');  fs.chown('/home/node/', 950, 950, (error) => {console.log(error)});"
+USER 950
 
-WORKDIR /src/app
+# make dir to copy into
+WORKDIR /app
 
-COPY . /src/app
+# copy all
+COPY --chown=950:950 . .
 
-RUN npm install
+# build prod files
+RUN npm run build
 
-EXPOSE 3030
+# document the port
+EXPOSE 8080
 
-CMD [ "npm", "run", "build"]
+# run the app
+CMD ["/bin/bash", "/app/entrypoint.sh"]

@@ -31,7 +31,7 @@ describe('\'services\' service', () => {
     expect.assertions(1);
 
     const { data } = await axios.get(getUrl('services'));
-
+    console.log(data);
     expect(data['limit']).toBe(10);
   });
 });

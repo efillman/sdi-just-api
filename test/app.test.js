@@ -49,7 +49,7 @@ describe('Feathers application tests (with jest)', () => {
 
     it('shows a 404 JSON error without stack trace', async () => {
       expect.assertions(4);
-      
+
       try {
         await axios.get(getUrl('path/to/nowhere'));
       } catch (error) {
@@ -62,4 +62,31 @@ describe('Feathers application tests (with jest)', () => {
       }
     });
   });
+
+  it('registered the service', () => {
+    const service = app.service('system');
+    expect(service).toBeTruthy();
+  });
+
+  it('starts and returns the system endpoint', async () => {
+    expect.assertions(1);
+
+    const { data } = await axios.get(getUrl('system'));
+
+    expect(data['limit']).toBe(10);
+  });
+
+  it('registered the service', () => {
+    const service = app.service('services');
+    expect(service).toBeTruthy();
+  });
+
+  it('starts and shows the index page', async () => {
+    expect.assertions(1);
+
+    const { data } = await axios.get(getUrl('services'));
+    console.log(data);
+    expect(data['limit']).toBe(10);
+  });
+
 });
