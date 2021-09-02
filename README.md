@@ -1,14 +1,16 @@
-##Local Dev, docker database
--to start run docker-compose up -d from /datbase-pg
-then run npm run build
-kill that
-then run npm run start
-API is on port 8080
+# Instructions
 
-##Local Dev, api and database in docker
-!!!SRC Changes will not be live from backend!!!
-npm run devdocker
-API port is on 8080
+## Setup
+1. Ensure you are connected to the p1 image store: (from terminal)
+docker login registry.il2.dso.mil
+When prompted for your username, use p1 email and personal code
 
-##Local Docker Build Tests
-npm run testdocker
+## Run Options
+- npm run devdb with npm run buildfresh
+  - postgres in docker with feathers running locally on 8080
+- npm run devdocker
+  - postgress and feathers in dockers on 8080
+- npm run testdocker
+  - closed loop docker test of postgress and feathers that runs the jest tests and exits
+- npm run burnin [UNIX OS only]
+  - postgres and feathers in docker using acutal P1 build files

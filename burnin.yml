@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  just-api-dev-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: PG_USER
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: PG_DATABASE
+
+  just-api-dev-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://PG_USER:password@just-api-dev-db:5432/PG_DATABASE
+      PORT: 8080
+      IS_LOCAL: 'true'
+    ports:
+      - 8080:8080
