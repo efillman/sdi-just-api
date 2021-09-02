@@ -13,6 +13,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      - 'just-api-dev-db'
     environment:
       NODE_ENV: development
       DATABASE_URL: postgresql://PG_USER:password@just-api-dev-db:5432/PG_DATABASE

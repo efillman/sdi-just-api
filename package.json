@@ -32,6 +32,7 @@
     "devdb": "docker-compose -f devdb.yml up -d",
     "test": "npm run jest",
     "lint": "eslint src/. test/. --config .eslintrc.json --fix",
+    "buildfreshdocker": "npm install && npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && node src/",
     "buildfresh": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && node src/",
     "build": "node src/",
     "dev": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && PORT=8080 nodemon src/",

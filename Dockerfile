@@ -10,6 +10,8 @@ USER appuser
 
 COPY --chown=950:950 . .
 
+RUN npm install
+
 EXPOSE 8080
 
 CMD ["/bin/bash", "/app/entrypoint.sh"]

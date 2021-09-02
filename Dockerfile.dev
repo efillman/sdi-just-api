@@ -12,4 +12,4 @@ COPY --chown=950:950 . .
 
 EXPOSE 8080
 
-ENTRYPOINT ["npm","run","buildfresh"]
+ENTRYPOINT ["npm","run","buildfreshdocker"]
