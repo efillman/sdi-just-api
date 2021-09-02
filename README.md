@@ -8,8 +8,11 @@ When prompted for your username, use p1 email and personal code
 ## Run Options
 - npm run devdb with npm run buildfresh
   - postgres in docker with feathers running locally on 8080
+  - changes will be reflected
+  - must manually kill docker db if to do other stuff
 - npm run devdocker
   - postgress and feathers in dockers on 8080
+  - local changes will not be reflected
 - npm run testdocker
   - closed loop docker test of postgress and feathers that runs the jest tests and exits
 - npm run burnin [UNIX OS only]
