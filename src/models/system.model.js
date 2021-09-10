@@ -29,6 +29,11 @@ class System extends Model {
 
   static get relationMappings() {
     const Services = require('./services.model');
+    const Contact = require('./contact.model');
+    const Compatibility = require('./compatibility.model');
+    const SystemOrganization = require('./system_organization.model');
+    const UpstreamSystemOrg = require('./upstream_system_org.model');
+    const DownstreamSystemOrg = require('./downstream_system_org.model');
 
     return {
       service: {
@@ -39,7 +44,55 @@ class System extends Model {
           to: 'services.service_id',
         },
       },
+      contact: {
+        relation: Model.HasManyRelation,
+        modelClass: Contact,
+        join: {
+          from: 'system.system_id',
+          to: 'contact.system_id',
+        },
+      },
+      compatibility: {
+        relation: Model.HasManyRelation,
+        modelClass: Compatibility,
+        join: {
+          from: 'system.system_id',
+          to: 'compatibility.system_id',
+        },
+      },
+      system_organization: {
+        relation: Model.HasManyRelation,
+        modelClass: SystemOrganization,
+        join: {
+          from: 'system.system_id',
+          to: 'system_organization.system_id',
+        },
+      },
+      upstream_system_org: {
+        relation: Model.HasManyRelation,
+        modelClass: UpstreamSystemOrg,
+        join: {
+          from: 'system.system_id',
+          to: 'upstream_system_org.system_id',
+        },
+      },
+      downstream_system_org: {
+        relation: Model.HasManyRelation,
+        modelClass: DownstreamSystemOrg,
+        join: {
+          from: 'system.system_id',
+          to: 'downstream_system_org.system_id',
+        },
+      },
     };
+  }
+
+  static get modifiers() {
+    return {
+      orderByImportance(builder) {
+        builder.orderBy('system_importance')
+      }
+    }
   }
 
   $beforeInsert() {

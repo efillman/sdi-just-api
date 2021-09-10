@@ -1,52 +1,36 @@
 {
-  "name": "sdi-library-backend",
-  "description": "ReST API for JUST project",
-  "version": "0.0.0",
-  "homepage": "",
-  "private": true,
-  "main": "src",
-  "keywords": [
-    "feathers"
-  ],
-  "author": {
-    "name": "JUST",
-    "email": "JUST@JUST.com"
-  },
-  "contributors": [],
-  "bugs": {},
-  "directories": {
-    "lib": "src",
-    "test": "test/",
-    "config": "config/"
-  },
-  "engines": {
-    "node": "^16.0.0",
-    "npm": ">= 3.0.0"
-  },
+  "name": "express_world",
+  "version": "1.0.0",
+  "description": "Express Hello World App",
+  "main": "app.js",
   "scripts": {
+    "testexport": "export DATABASE_URL=\"postgresql://${PG_USER}:${APP_DB_ADMIN_PASSWORD}@${PGHOST}:${PGPORT}/${PG_DATABASE}\" && echo $DATABASE_URL",
+    "start": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && node src/",
+    "test": "npm install && jest",
+    "test:unit": "jest --coverage",
+    "format": "prettier --write \"src/**/*.js\"",
+    "lint": "npm install && eslint",
+    "test:e2e-ci": "",
     "testdocker:pre": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && npx jest --watchAll=false --forceExit",
     "testdocker:unit": "npm install && npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && npx jest --watchAll=false --forceExit",
     "testdocker": "docker-compose -f test.yml -p just-api-test up --build --force-recreate --no-deps --exit-code-from just-api-test-api",
     "devdocker": "docker-compose -f dev.yml -p just-api-dev up --build --force-recreate --no-deps",
     "burnin": "docker-compose -f burnin.yml -p just-api-dev up --build --force-recreate --no-deps",
     "devdb": "docker-compose -f devdb.yml up -d",
-    "test": "npm run jest",
-    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
-    "buildfreshdocker": "npm install && npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && node src/",
+    "buildfreshdocker": "npm install && npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && nodemon src/",
     "buildfresh": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && node src/",
     "build": "node src/",
     "dev": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && PORT=8080 nodemon src/",
+    "dev-win": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && set PORT=8080 && nodemon src/",
     "jest": "jest  --forceExit"
   },
-  "jest": {
-    "testTimeout": 30000
+  "author": "",
+  "directories": {
+    "lib": "src",
+    "test": "test/",
+    "config": "config/"
   },
-  "standard": {
-    "env": [
-      "jest"
-    ],
-    "ignore": []
-  },
+  "license": "ISC",
   "dependencies": {
     "@feathersjs/configuration": "^4.5.11",
     "@feathersjs/errors": "^4.5.11",
@@ -55,15 +39,9 @@
     "@feathersjs/transport-commons": "^4.5.11",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "feathers-hooks-common": "^5.0.6",
-    "feathers-knex": "^8.0.0",
     "feathers-objection": "^7.5.1",
-    "feathers-validate-joi": "^4.0.1",
     "helmet": "^4.6.0",
-    "install": "^0.13.0",
-    "joi": "^17.4.2",
-    "knex": "^0.95.10",
-    "npm": "^7.21.1",
+    "knex": "<0.95.0",
     "objection": "^2.2.15",
     "pg": "^8.7.1",
     "serve-favicon": "^2.5.0",
@@ -71,8 +49,9 @@
   },
   "devDependencies": {
     "axios": "^0.21.1",
-    "eslint": "^7.32.0",
-    "jest": "^27.0.6",
-    "nodemon": "^2.0.12"
+    "eslint": "^7.13.0",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.12",
+    "typescript": "^4.0.5"
   }
 }

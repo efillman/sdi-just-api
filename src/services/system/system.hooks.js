@@ -7,8 +7,7 @@ module.exports = {
       async (context) => {
         const query = {
           $select: ['*'],
-          $eager: 'service',
-          $sort: { created_at: -1 },
+          $eager: "[service, contact, compatibility.[baseline, transmit.[message], receive.[message]], system_organization.[organization], upstream_system_org.[system_organization.[organization]], downstream_system_org.[system_organization.[organization]]]",
         };
 
         context.params.query = { ...context.params.query, ...query };
@@ -19,8 +18,7 @@ module.exports = {
       async (context) => {
         const query = {
           $select: ['*'],
-          $eager: 'service',
-          $sort: { created_at: -1 },
+          $eager: "[service, contact, compatibility.[baseline, transmit.[message], receive.[message]], system_organization.[organization], upstream_system_org.[system_organization.[organization]], downstream_system_org.[system_organization.[organization]]]",
         };
 
         context.params.query = { ...context.params.query, ...query };
