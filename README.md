@@ -5,8 +5,16 @@
 docker login registry.il2.dso.mil
 When prompted for your username, use p1 email and personal code
 
+### Local Environmental Variables
+export PG_USER=PG_USER
+export APP_DB_ADMIN_PASSWORD=password
+export PGHOST=localhost
+export PGPORT=5432
+export PORT=8080
+export PG_DATABASE=PG_DATABASE
+
 ## Run Options
-- npm run devdb with npm run buildfresh
+- npm run devdb with npm run dev (make sure to local environmental variables set)
   - postgres in docker with feathers running locally on 8080
   - changes will be reflected
   - must manually kill docker db if to do other stuff

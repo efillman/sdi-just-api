@@ -16,8 +16,11 @@ services:
     depends_on:
       - 'just-api-dev-db'
     environment:
-      NODE_ENV: development
-      DATABASE_URL: postgresql://PG_USER:password@just-api-dev-db:5432/PG_DATABASE
+      PG_USER: PG_USER
+      APP_DB_ADMIN_PASSWORD: password
+      PGHOST: localhost
+      PGPORT: 5432
+      PG_DATABASE: PG_DATABASE
       PORT: 8080
       IS_LOCAL: 'true'
     ports:
